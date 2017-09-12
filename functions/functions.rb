@@ -4,12 +4,12 @@ end
 
 def sign_in
   puts "Please enter username or type 'new user' to create a new user" #and password"
-  user_name = gets.chomp
-  if user_name.downcase == 'quit'
+  user_name = gets.chomp.downcase
+if user_name == 'quit' || user_name == 'e'
     return nil
   end
   user_name = user_name.downcase == "new user" ? create_new_user : user_name
-  has_user = User.find_by(user_name:user_name)
+  has_user = User.where("lower(user_name) = ?", user_name.downcase).first
   unless has_user
     puts "\nUser name not found"
     puts "\nType 'quit' to leave"
@@ -40,8 +40,9 @@ def prompt_user(user)
   puts "What would you like to do?"
   puts "  [View] all games/[Join] a game queue"
   puts "  [Leave] a game queue"
+  puts "  [Abandon] all game queues"
   puts "  [Add] a game to the list"
-  puts "  [Remove] a game from the list"
+  puts "  [Remove] my game from the list"
   puts "  [My] gaming queue"
   puts "  [Logout]"
 
@@ -52,13 +53,15 @@ def prompt_user(user)
     choose_game(user)
   when "leave","leav","leve","lave","laeve"
     user.leave_queue
+  when "abandon","abandn","abando"
+    user.leave_all_queues
   when "add","ad","dad"
     user.add_game
   when "remove"
     user.remove_game
   when "my","ym"
     user.view_user_games
-  when "logout","lgout","quit","qut","qiut","qit"
+  when "logout","lgout","quit","qut","qiut","qit", "exit"
     $logout = true
   else
   end

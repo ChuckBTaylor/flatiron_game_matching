@@ -14,12 +14,8 @@ ActiveRecord::Schema.define(version: 20170912154508) do
 
   create_table "games", force: :cascade do |t|
     t.string "name"
-    t.integer "min"
-    t.integer "max"
     t.integer "user_id"
     t.string "quick_description"
-    t.boolean "has_min", default: false
-    t.boolean "has_max", default: false
   end
 
   create_table "gaming_queues", force: :cascade do |t|

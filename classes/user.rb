@@ -20,6 +20,13 @@ class User < ActiveRecord::Base
     GamingQueue.destroy(gameQ_id)
   end
 
+  def leave_all_queues
+    gqrows = GamingQueue.where(user_id: self.id)
+    gqrows.each do |row|
+      GamingQueue.destroy(row.id)
+    end
+  end
+
 #
 
   def view_user_games
@@ -61,5 +68,11 @@ class User < ActiveRecord::Base
     else
       puts "You don't have permission to remove that game."
     end
+  end
+
+  #
+
+  def self.find_by_lower_name(name)
+    self.find_by(name:name)
   end
 end
