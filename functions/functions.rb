@@ -3,28 +3,80 @@ def welcome
 end
 
 def sign_in
-
+  puts "Please enter username or type 'new user' to create a new user" #and password"
+  user_name = gets.chomp
+  if user_name.downcase == 'quit'
+    return nil
+  end
+  user_name = user_name.downcase == "new user" ? create_new_user : user_name
+  has_user = User.find_by(user_name:user_name)
+  unless has_user
+    puts "\nUser name not found"
+    puts "\nType 'quit' to leave"
+    has_user = sign_in
+  end
+  has_user
 end
 
-def prompt_user
+
+def create_new_user
+  yn = 'a'
+  until yn.downcase == 'y' do
+    puts "Please enter your name"
+    name = gets.chomp
+    puts "Please enter your user name"
+    user_name = gets.chomp
+    puts "\n Is this correct? (Y/N)"
+    puts "Name: #{name}   User name:#{user_name}"
+    yn = gets.chomp
+  end
+
+  new_user = User.new({name: name, user_name: user_name})
+  new_user.save
+  user_name
+end
+
+def prompt_user(user)
   puts "What would you like to do?"
-  puts "  JOIN a game queue"
-  puts "  LEAVE a game queue"
-  puts "  ADD a game to the list"
-  puts "  REMOVE a game from the list"
-  puts "  VIEW gaming queue"
+  puts "  [View] all games/[Join] a game queue"
+  puts "  [Leave] a game queue"
+  puts "  [Add] a game to the list"
+  puts "  [Remove] a game from the list"
+  puts "  [My] gaming queue"
+  puts "  [Logout]"
 
   choice = gets.chomp
 
   case choice.downcase
-  when "join"
-    puts "Which fame would you like to join?"
-    game = gets.chomp
-    user.join_queue(game)
-  when "leave"
-  when "add"
+  when "join","jon","view","vew","veiw","jin"
+    choose_game(user)
+  when "leave","leav","leve","lave","laeve"
+    user.leave_queue
+  when "add","ad","dad"
+    user.add_game
   when "remove"
-  when "view"
+    user.remove_game
+  when "my","ym"
+    user.view_user_games
+  when "logout","lgout","quit","qut","qiut","qit"
+    $logout = true
   else
   end
+end
+
+def choose_game(user)
+  puts "What game would you like to play?"
+  Game.all.each do |game|
+    puts "#{game.id}: #{game.name}"
+  end
+  puts "Which game would you like to join?"
+  puts "  or '0' to return"
+  game = gets.chomp.to_i
+  unless game == 0
+    user.join_queue(game)
+  end
+end
+
+def goodbye
+  puts "Thanks for using Flatch!"
 end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170911220457) do
+ActiveRecord::Schema.define(version: 20170912154508) do
 
   create_table "games", force: :cascade do |t|
     t.string "name"
@@ -18,6 +18,8 @@ ActiveRecord::Schema.define(version: 20170911220457) do
     t.integer "max"
     t.integer "user_id"
     t.string "quick_description"
+    t.boolean "has_min", default: false
+    t.boolean "has_max", default: false
   end
 
   create_table "gaming_queues", force: :cascade do |t|
@@ -30,6 +32,7 @@ ActiveRecord::Schema.define(version: 20170911220457) do
   create_table "users", force: :cascade do |t|
     t.string "name"
     t.string "user_name"
+    t.boolean "in_session", default: false
   end
 
 end

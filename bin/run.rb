@@ -1,20 +1,22 @@
 require_relative "../config/environment.rb"
 
 
-ashe = User.find_by(user_name:"AsheBashe")
+# ashe = User.find_by(user_name:"AsheBashe")
+# flatiron = User.find_or_create_by(name:"Flatiron School", id:1)
 
-will = User.find_by(user_name: "ChuckBTaylor")
-will.save
-
-anna = User.find_by(user_name: "Annnnnna")
-anna.save
-
-# settlers = Game.new(name:"Settlers of Catan",min:3,max:4,quick_description:"It's a lot of fun")
-# dominion = Game.new(name:"Dominion",min:2,max:4,quick_description:"Deck-building game")
-# will.join_queue(settlers)
-# ashe.join_queue(settlers)
-# ashe.join_queue(dominion)
-
-
+welcome
+#----
+user = sign_in #user is the instance of User variable
+$logout = false
+if user
+  while $logout == false
+    prompt_user(user)
+    if $logout == true
+      user = nil
+    end
+  end
+end
+goodbye
+#----
 binding.pry
 "Test"
