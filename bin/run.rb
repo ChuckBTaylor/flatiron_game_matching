@@ -1,13 +1,20 @@
 require_relative "../config/environment.rb"
-#
-#
-# ashe = User.new("Ashe")
-# will = User.new("Will")
-# settlers = Game.new("Settlers of Catan",3,4,"Flatiron","It's a lot of fun")
-# dominion = Game.new("Dominion",2,4,"Flatiron","Deck-building game")
+
+
+ashe = User.find_by(user_name:"AsheBashe")
+
+will = User.find_by(user_name: "ChuckBTaylor")
+will.save
+
+anna = User.find_by(user_name: "Annnnnna")
+anna.save
+
+# settlers = Game.new(name:"Settlers of Catan",min:3,max:4,quick_description:"It's a lot of fun")
+# dominion = Game.new(name:"Dominion",min:2,max:4,quick_description:"Deck-building game")
 # will.join_queue(settlers)
 # ashe.join_queue(settlers)
 # ashe.join_queue(dominion)
-#
-# binding.pry
-# "Test"
+
+
+binding.pry
+"Test"
