@@ -32,6 +32,7 @@ class Session
     @session_hash[:players]
   end
 
+
   def add_player(player)
     if (!self.has_max?) && (player.in_session == false)
       @session_hash[:players] << player

@@ -16,6 +16,6 @@ welcome
 # end
 # goodbye
 #----
-# x.place_users
+x.place_users
 binding.pry
 "Test"

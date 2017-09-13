@@ -6,3 +6,17 @@ GamingQueue.new(user_id:7, game_id:2)#.save
 GamingQueue.new(user_id:6, game_id:1)#.save
 GamingQueue.new(user_id:6, game_id:2)#.save
 GamingQueue.new(user_id:11, game_id:1)#.save
+GamingQueue.new(user_id:7, game_id:3)#.save
+GamingQueue.new(user_id:13, game_id:3)#.save
+GamingQueue.new(user_id:13, game_id:4)#.save
+GamingQueue.new(user_id:13, game_id:5)#.save
+GamingQueue.new(user_id:6, game_id:4)#.save
+GamingQueue.new(user_id:6, game_id:5)#.save
+GamingQueue.new(user_id:12, game_id:3)#.save
+GamingQueue.new(user_id:12, game_id:5)#.save
+GamingQueue.new(user_id:14, game_id:3)#.save
+GamingQueue.new(user_id:14, game_id:5)#.save
+GamingQueue.new(user_id:15, game_id:4)#.save
+GamingQueue.new(user_id:15, game_id:2)#.save
+GamingQueue.new(user_id:16, game_id:3)#.save
+GamingQueue.new(user_id:16, game_id:4)#.save
