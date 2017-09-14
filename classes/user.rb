@@ -5,8 +5,14 @@ class User < ActiveRecord::Base
   #
 
   def join_queue(game)
-    new_gaming_q = GamingQueue.new(user_id:self.id, game_id:game)
-    new_gaming_q.save
+    exists = GamingQueue.find_by(user_id:self.id, game_id:game)
+    if exists
+      puts "You're already in the queue for #{Game.find(game).name}!"
+    else
+      new_gaming_q = GamingQueue.new(user_id:self.id, game_id:game)
+      new_gaming_q.save
+      puts "You've joined the queue for #{Game.find(game).name}."
+    end
   end
 
   #
