@@ -7,11 +7,19 @@ class User < ActiveRecord::Base
   def join_queue(game)
     exists = GamingQueue.find_by(user_id:self.id, game_id:game)
     if exists
+<<<<<<< HEAD
       puts "You're already in the queue for #{Game.find(game).name}!"
     else
       new_gaming_q = GamingQueue.new(user_id:self.id, game_id:game)
       new_gaming_q.save
       puts "You've joined the queue for #{Game.find(game).name}."
+=======
+        puts "You've already signed up for #{Game.find(game).name}."
+    else
+        new_gaming_q = GamingQueue.new(user_id:self.id, game_id:game)
+        new_gaming_q.save
+        puts "You signed up for #{Game.find(game).name}."
+>>>>>>> a68cdd3c7c6a9ec7d6b7aade42c2f2dd84de26d8
     end
   end
 

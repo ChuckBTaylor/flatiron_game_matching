@@ -154,7 +154,12 @@ end
       until new_sesh.has_min?
     new_sesh.add_player(return_remaining_users_for_game(largest_remaining.id).sample)
   end
+<<<<<<< HEAD
   largest_remaining = get_largest_remaining_game_as_instance
 end
 end
+=======
+
+
+>>>>>>> a68cdd3c7c6a9ec7d6b7aade42c2f2dd84de26d8
 end
