@@ -5,21 +5,14 @@ class User < ActiveRecord::Base
   #
 
   def join_queue(game)
+    new_gaming_q = GamingQueue.new(user_id:self.id, game_id:game)
     exists = GamingQueue.find_by(user_id:self.id, game_id:game)
+    new_gaming_q.save
     if exists
-<<<<<<< HEAD
-      puts "You're already in the queue for #{Game.find(game).name}!"
+      puts "You've already signed up for #{Game.find(game).name}."
     else
-      new_gaming_q = GamingQueue.new(user_id:self.id, game_id:game)
-      new_gaming_q.save
-      puts "You've joined the queue for #{Game.find(game).name}."
-=======
-        puts "You've already signed up for #{Game.find(game).name}."
-    else
-        new_gaming_q = GamingQueue.new(user_id:self.id, game_id:game)
-        new_gaming_q.save
-        puts "You signed up for #{Game.find(game).name}."
->>>>>>> a68cdd3c7c6a9ec7d6b7aade42c2f2dd84de26d8
+      new_gaming_q = GamingQueue.new(user_id:self.id, game_id:gamenew_gaming_q.save)
+      puts "You signed up for #{Game.find(game).name}."
     end
   end
 
@@ -83,6 +76,7 @@ class User < ActiveRecord::Base
       puts "You don't have permission to remove that game."
     end
   end
+
 
   #
 

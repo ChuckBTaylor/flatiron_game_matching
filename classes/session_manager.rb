@@ -4,13 +4,19 @@ class SessionManager
     User.update_all(in_session: false)
   end
 
+#
+
   def pull_data()
     GamingQueue.all
   end
 
+#
+
   def sort_by_sessions()
     GamingQueue.group(:user_id).count
   end
+
+#
 
   def place_uniq_users()
     sort_by_sessions.each do |user, num_sessions|
@@ -22,6 +28,8 @@ class SessionManager
     end
   end
 
+#
+
   def min_minus(missing)
     Session.all.select do |session|
       session.players.count == (session.session_min - missing)
@@ -32,16 +40,16 @@ class SessionManager
     array = min_minus(1)
     array.each do |session|
       gqrows = GamingQueue.where(game_id: session.session_hash[:game].id)
-      new_player = gqrows.map do |row|
-        User.find(row.user_id)
-    end.find do |user|
-      user.in_session == false
+        new_player = gqrows.map do |row|
+          User.find(row.user_id)
+        end.find do |user|
+          user.in_session == false
+        end
+        if new_player
+        session.add_player(new_player)
       end
-    if new_player
-      session.add_player(new_player)
     end
   end
-end
 
   def place_users()
     self.place_uniq_users()
@@ -51,7 +59,6 @@ end
     self.fill_to_min_2
     return unless players_left?
     self.create_and_place_other_sessions
-
     self.fill_games
   end
 
@@ -142,6 +149,8 @@ end
       GamingQueue.where(user_id: user.id).any? do |gq_row|
         gq_row.game_id == game_id
       end
+    end
+  end
 
   def largest_remaining_has_min?
     get_largest_remaining_game_as_instance.min <= get_largest_remaining_as_array[1] ? true : false
@@ -154,12 +163,7 @@ end
       until new_sesh.has_min?
     new_sesh.add_player(return_remaining_users_for_game(largest_remaining.id).sample)
   end
-<<<<<<< HEAD
   largest_remaining = get_largest_remaining_game_as_instance
 end
 end
-=======
-
-
->>>>>>> a68cdd3c7c6a9ec7d6b7aade42c2f2dd84de26d8
 end

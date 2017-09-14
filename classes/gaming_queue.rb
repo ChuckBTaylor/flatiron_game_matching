@@ -1,4 +1,4 @@
-class GamingQueue < ActiveRecord::Base[5.1]
+class GamingQueue < ActiveRecord::Base
 
   ALL = []
   attr_reader :user, :game
